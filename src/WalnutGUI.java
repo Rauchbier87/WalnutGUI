@@ -9,8 +9,8 @@ import java.util.Collections;
 public class WalnutGUI extends JFrame {
     static JTextArea area;
     private static ArrayList<String> cups = new ArrayList<>();
-    Icon c = new ImageIcon("src/resources/cup.jpeg");
-    Icon w = new ImageIcon("src/resources/walnut.jpeg");
+    Icon c = new ImageIcon(getClass().getResource("/resources/cup.jpeg"));
+    Icon w = new ImageIcon(getClass().getResource("/resources/walnut.jpeg"));
 
     public WalnutGUI(){
         init();
