@@ -7,19 +7,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class WalnutGUI extends JFrame {
+    //set up Frame
     static JTextArea area;
     private static ArrayList<String> cups = new ArrayList<>();
     Icon c = new ImageIcon(getClass().getResource("/resources/cup.jpeg"));
     Icon w = new ImageIcon(getClass().getResource("/resources/walnut.jpeg"));
+    Icon f = new ImageIcon(getClass().getResource("/resources/empty.jpeg"));
 
+    //when instantiated it initializes
     public WalnutGUI(){
         init();
     }
 
     public final void init(){
+        //set up frame with panel. "this" is implicit for frame items
         JPanel p = new JPanel();
-        setLayout(new FlowLayout());
         p.setEnabled(true);
+        setLayout(new FlowLayout());
         setEnabled(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("The Walnut Game");
@@ -28,6 +32,7 @@ public class WalnutGUI extends JFrame {
         setVisible(true);
         add(p);
 
+        //create boxes in the layout and add components
         p.add(Box.createRigidArea(new Dimension(0, 50)));
         area = new JTextArea();
         area.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
@@ -46,7 +51,9 @@ public class WalnutGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                reveal(0);
-               if (cups.get(0).equals("Walnut")){b1.setIcon(w);}
+               if (cups.get(0).equals("Walnut")){
+                   b1.setIcon(w);
+               }else {b1.setIcon(f);}
                cups.clear();
                revalidate();
             }
@@ -61,7 +68,9 @@ public class WalnutGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                reveal(1);
-                if (cups.get(1).equals("Walnut")){b2.setIcon(w);}
+                if (cups.get(1).equals("Walnut")){
+                    b2.setIcon(w);
+                }else {b2.setIcon(f);}
                 cups.clear();
                 revalidate();
             }
@@ -76,7 +85,9 @@ public class WalnutGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 reveal(2);
-                if (cups.get(2).equals("Walnut")){b3.setIcon(w);}
+                if (cups.get(2).equals("Walnut")){
+                    b3.setIcon(w);
+                }else {b3.setIcon(f);}
                 cups.clear();
                 revalidate();
             }
@@ -101,7 +112,7 @@ public class WalnutGUI extends JFrame {
             }
         });
         p.add(b4);
-
+        //finish set up and revalidate to ensure proper set up implemented
         setCups();
         cupSwitch();
         revalidate();
@@ -109,16 +120,19 @@ public class WalnutGUI extends JFrame {
     }
 
     private static void setCups(){
+        //load the ArrayList
         cups.add("Walnut");
         cups.add("Empty");
         cups.add("Empty");
     }
 
     private static void cupSwitch(){
+        //shuffle cups to play
         Collections.shuffle(cups);
     }
 
     public static void runIntro(){
+        //display greeting on start
         area.setText("Welcome to the walnut game!\n");
         pause();
         area.append("Press play to start \nor reset between matches");
@@ -131,6 +145,7 @@ public class WalnutGUI extends JFrame {
     }
 
     public static void reveal(Integer cup){
+        //display result of choice
         if (cups.get(cup).equals("Walnut")){
             area.setText("\n"+cups.get(cup)+": lucky guess!");
         }else {
@@ -139,6 +154,7 @@ public class WalnutGUI extends JFrame {
     }
 
     public static void main(String[] args){
+        //instantiates GUI
         new WalnutGUI();
     }
 }
